@@ -1,7 +1,21 @@
-export default async function CurrentArticlePage({params}) {
-    const {articleId} = await params;
-    const BASE_URL = "https://pid-korkom-api.onrender.com/api/articles";
-    const article = await fetch(`${BASE_URL}/${articleId}`).then(res => res.json())
+export async function generateMetadata({ params }) {
+  const { articleId } = await params;
+  const BASE_URL = "https://pid-korkom-api.onrender.com/api/articles";
+  const article = await fetch(`${BASE_URL}/${articleId}`, {
+    next: { revalidate: 60 },
+  }).then((res) => res.json());
+  return {
+    title: article.title,
+    description: article.text.slice(0, 150)
+  }
+}
+
+export default async function CurrentArticlePage({ params }) {
+  const { articleId } = await params;
+  const BASE_URL = "https://pid-korkom-api.onrender.com/api/articles";
+  const article = await fetch(`${BASE_URL}/${articleId}`, {
+    next: { revalidate: 60 },
+  }).then((res) => res.json());
   return (
     <div className="max-w-3xl mx-auto px-4 py-8">
       <article>

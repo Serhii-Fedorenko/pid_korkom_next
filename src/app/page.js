@@ -2,7 +2,7 @@ import Link from "next/link";
 
 export default async function Home() {
   const BASE_URL = "https://pid-korkom-api.onrender.com/api/articles";
-  const res = await fetch(BASE_URL).then((res) => res.json());
+  const res = await fetch(BASE_URL,{ next: { revalidate: 60 } }).then((res) => res.json());
 
   return (
     <>
