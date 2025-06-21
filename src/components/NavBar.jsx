@@ -15,6 +15,9 @@ const NavBar = () => {
           <Link href="/categories/wine" className="hover:underline">Вино</Link>
           <Link href="/categories/other" className="hover:underline">Інше</Link>
         </div>
+        <div>
+          <button className="hover:underline cursor-pointer">Увійти</button>
+        </div>
       </nav>
     </header>
   );
