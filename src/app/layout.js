@@ -1,4 +1,5 @@
 import NavBar from "@/components/NavBar";
+import { ModalProvider } from "@/context/ModalContext";
 import "./globals.css";
 
 export const metadata = {
@@ -11,7 +12,9 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body>
-        <NavBar />
+        <ModalProvider>
+          <NavBar />
+        </ModalProvider>
         <main>{children}</main>
         <div id="modal-root"></div>
       </body>
