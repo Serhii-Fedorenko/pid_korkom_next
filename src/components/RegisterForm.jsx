@@ -32,11 +32,30 @@ export default function RegisterForm() {
 
   return (
     <form onSubmit={handleSubmit} className="space-y-4">
-      <input type="text" name="name" placeholder="Ім'я" required />
-      <input type="email" name="email" placeholder="Пошта" required />
-      <input type="password" name="password" placeholder="Пароль" required />
-      <button type="submit">Зареєструватися</button>
-      {error && <p className="text-red-500">{error}</p>}
+      <input
+        type="text"
+        name="name"
+        placeholder="ім'я"
+        className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-blue-400"
+      ></input>
+      <input
+        type="text"
+        name="email"
+        placeholder="пошта"
+        className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-blue-400"
+      ></input>
+      <input
+        type="password"
+        name="password"
+        placeholder="пароль"
+        className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-blue-400"
+      ></input>
+      <button
+        type="submit"
+        className="w-full bg-blue-600 text-white py-2 rounded-md hover:bg-blue-700 transition"
+      >
+        Зареєструватися
+      </button>
     </form>
   );
 }

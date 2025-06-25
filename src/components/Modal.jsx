@@ -8,7 +8,7 @@ import RegisterForm from "./RegisterForm";
 
 export default function Modal({ onClose }) {
   const [modalRoot, setModalRoot] = useState(null);
-  const { isOpen, view, closeModal } = useModal();
+  const { isOpen, view, closeModal, toggleModal } = useModal();
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
@@ -35,6 +35,12 @@ export default function Modal({ onClose }) {
     >
       <div className="bg-white rounded-xl shadow-xl p-6 w-full max-w-md sm:max-w-lg">
         {view === "login" ? <LoginForm /> : <RegisterForm />}
+        <button
+          onClick={toggleModal}
+          className="w-full bg-blue-600 text-white py-2 rounded-md hover:bg-blue-700 transition mt-5"
+        >
+          {view === "login" ? "Ще немає акаунту?" : "Вже є акаунт?"}
+        </button>
       </div>
     </div>,
     modalRoot
