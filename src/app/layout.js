@@ -1,4 +1,5 @@
 import NavBar from "@/components/NavBar";
+import { AuthProvider } from "@/context/AuthContext";
 import { ModalProvider } from "@/context/ModalContext";
 import "./globals.css";
 
@@ -12,11 +13,13 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body>
-        <ModalProvider>
-          <NavBar />
-        </ModalProvider>
-        <main>{children}</main>
-        <div id="modal-root"></div>
+        <AuthProvider>
+          <ModalProvider>
+            <NavBar />
+          </ModalProvider>
+          <main>{children}</main>
+          <div id="modal-root"></div>
+        </AuthProvider>
       </body>
     </html>
   );

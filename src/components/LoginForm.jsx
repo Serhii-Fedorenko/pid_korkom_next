@@ -1,31 +1,32 @@
 "use client";
-import { useAuth } from "@/lib/useAuth";
-import { useState } from "react";
+import { useAuth } from "@/context/AuthContext";
+import { useModal } from "@/context/ModalContext";
 
 export default function LoginForm() {
-  const { setUser } = useAuth();
-  const [error, setError] = useState("");
+  const { login } = useAuth();
+  const {closeModal} = useModal()
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     const form = e.target;
-
     const res = await fetch("/api/auth/login", {
       method: "POST",
       body: JSON.stringify({
         email: form.email.value,
         password: form.password.value,
       }),
+      headers: {
+        "Content-Type": "application/json",
+      },
     });
 
-    if (!res.ok) {
-      setError("Невірна пошта або пароль");
-      return;
+    if (res.ok) {
+      const userData = await res.json();
+      login(userData); 
+      closeModal?.(); 
+    } else {
+      alert("Помилка логіну");
     }
-
-    const user = await res.json();
-    localStorage.setItem("user", JSON.stringify(user));
-    setUser(user);
   };
 
   return (
