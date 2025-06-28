@@ -3,6 +3,7 @@ import Modal from "./Modal";
 import UserMenu from "./UserMenu";
 
 const NavBar = () => {
+
   return (
     <header className="flex flex-col">
       <nav className="bg-blue-600 text-white flex flex-wrap items-center justify-between p-4">
@@ -28,6 +29,7 @@ const NavBar = () => {
           <Link href="/categories/other" className="hover:underline">
             Інше
           </Link>
+          
         </div>
         <div>
           <UserMenu />
