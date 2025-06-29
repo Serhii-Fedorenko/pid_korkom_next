@@ -8,12 +8,14 @@ export const useAuth = () => useContext(AuthContext);
 
 export function AuthProvider({ children }) {
   const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const stored = localStorage.getItem("user");
     if (stored) {
       setUser(JSON.parse(stored));
     }
+    setLoading(false);
   }, []);
 
   const login = (userData) => {
@@ -35,6 +37,7 @@ export function AuthProvider({ children }) {
         isAdmin: user?.role === "admin",
         login,
         logout,
+        loading,
       }}
     >
       {children}

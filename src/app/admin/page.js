@@ -2,12 +2,12 @@
 
 import { useEffect, useState } from "react";
 import { useAuth } from "@/context/AuthContext";
+import { useRouter } from "next/navigation";
 import AddForm from "@/components/AddForm";
 import EditForm from "@/components/EditForm";
-import { useRouter } from "next/navigation";
 
 export default function AdminDashboard() {
-  const { user, isAdmin } = useAuth();
+  const { user, isAdmin, loading  } = useAuth();
   const [articles, setArticles] = useState([]);
   const [addForm, setAddForm] = useState(false);
   const [editForm, setEditForm] = useState(false);
@@ -52,6 +52,7 @@ export default function AdminDashboard() {
     setItemId(id);
   };
 
+  if (loading) return <p>Завантаження...</p>;
   if (!isAdmin) return null;
 
   return (
@@ -92,6 +93,7 @@ export default function AdminDashboard() {
         </ul>
       </div>
       <div className="md:w-1/2 w-full">
+        {/* <p>addForm: {addForm ? 'TRUE' : 'FALSE'}</p> */}
         {addForm && <AddForm collapseForm={setAddForm} />}
         {editForm && itemId && (
           <EditForm id={itemId} collapseForm={setEditForm} />
