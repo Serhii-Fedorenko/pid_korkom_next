@@ -6,7 +6,6 @@ const AddForm = ({ collapseForm }) => {
   const [image, setImage] = useState(null);
 
   const handleSubmit = async (e) => {
-    console.log("slkdfjlsdjflskjdlkf");
     e.preventDefault();
     const form = e.target;
 
@@ -18,14 +17,7 @@ const AddForm = ({ collapseForm }) => {
       formData.append("image", image);
     }
 
-    console.log("FORM ELEMENTS:", {
-      title: form.elements.title?.value,
-      text: form.elements.text?.value,
-      category: form.elements.category?.value,
-      image,
-    });
-
-    const res = await fetch("http://localhost:3000/api/admin", {
+    const res = await fetch("https://pid-korkom-api.onrender.com/api/admin", {
       method: "POST",
       body: formData,
       credentials: "include",

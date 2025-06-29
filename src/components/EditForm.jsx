@@ -8,7 +8,7 @@ const EditForm = ({ id, collapseForm }) => {
 
   useEffect(() => {
     const fetchArticle = async () => {
-      const res = await fetch(`/api/articles/${id}`);
+      const res = await fetch(`https://pid-korkom-api.onrender.com/api/articles/${id}`);
       const data = await res.json();
       setArticle(data);
     };
@@ -28,8 +28,8 @@ const EditForm = ({ id, collapseForm }) => {
       formData.append("image", image);
     }
 
-    const res = await fetch(`/api/articles/${id}`, {
-      method: "PATCH",
+    const res = await fetch(`https://pid-korkom-api.onrender.com/api/admin/${id}`, {
+      method: "PUT",
       body: formData,
     });
 
