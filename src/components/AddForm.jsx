@@ -13,6 +13,7 @@ const AddForm = ({ collapseForm }) => {
     formData.append("title", form.elements.title.value);
     formData.append("text", form.elements.text.value);
     formData.append("category", form.elements.category.value);
+    formData.append("slug", form.elements.slug.value);
     if (image) {
       formData.append("image", image);
     }
@@ -42,6 +43,12 @@ const AddForm = ({ collapseForm }) => {
         type="text"
         name="title"
         placeholder="Заголовок"
+        className="border border-gray-300 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+      />
+      <input
+        type="text"
+        name="slug"
+        placeholder="латиницею, через дефіси"
         className="border border-gray-300 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"
       />
       <select

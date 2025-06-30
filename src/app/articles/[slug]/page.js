@@ -1,7 +1,7 @@
 export async function generateMetadata({ params }) {
-  const { articleId } = await params;
+  const { slug } = await params;
   const BASE_URL = "https://pid-korkom-api.onrender.com/api/articles";
-  const article = await fetch(`${BASE_URL}/${articleId}`, {
+  const article = await fetch(`${BASE_URL}/${slug}`, {
     next: { revalidate: 60 },
   }).then((res) => res.json());
   return {
@@ -11,9 +11,9 @@ export async function generateMetadata({ params }) {
 }
 
 export default async function CurrentArticlePage({ params }) {
-  const { articleId } = await params;
-  const BASE_URL = "https://pid-korkom-api.onrender.com/api/articles";
-  const article = await fetch(`${BASE_URL}/${articleId}`, {
+  const { slug } = await params;
+  const BASE_URL = "https://pid-korkom-api.onrender.com/api/articles/slug";
+  const article = await fetch(`${BASE_URL}/${slug}`, {
     next: { revalidate: 60 },
   }).then((res) => res.json());
   return (
