@@ -4,11 +4,13 @@ import { useState, useEffect } from "react";
 
 const EditForm = ({ id, collapseForm }) => {
   const [image, setImage] = useState(null);
-  const [article, setArticle] = useState(null);
+  const [article, setArticle] = useState({});
 
   useEffect(() => {
     const fetchArticle = async () => {
-      const res = await fetch(`https://pid-korkom-api.onrender.com/api/articles/${id}`);
+      const res = await fetch(
+        `https://pid-korkom-api.onrender.com/api/articles/${id}`
+      );
       const data = await res.json();
       setArticle(data);
     };
@@ -24,14 +26,18 @@ const EditForm = ({ id, collapseForm }) => {
     formData.append("title", form.elements.title.value);
     formData.append("text", form.elements.text.value);
     formData.append("category", form.elements.category.value);
+    formData.append("slug", form.elements.slug.value);
     if (image) {
       formData.append("image", image);
     }
 
-    const res = await fetch(`https://pid-korkom-api.onrender.com/api/admin/${id}`, {
-      method: "PUT",
-      body: formData,
-    });
+    const res = await fetch(
+      `https://pid-korkom-api.onrender.com/api/admin/${id}`,
+      {
+        method: "PUT",
+        body: formData,
+      }
+    );
 
     if (res.ok) {
       collapseForm();
@@ -53,18 +59,28 @@ const EditForm = ({ id, collapseForm }) => {
         defaultValue={article.title}
         className="border border-gray-300 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"
       />
-      <select
-        name="category"
-        defaultValue={article.category}
+      <input
+        type="text"
+        name="slug"
+        placeholder="латиницею, через дефіси"
+        defaultValue={article.slug}
         className="border border-gray-300 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"
-      >
-        <option value="whisky">whisky</option>
-        <option value="rum">rum</option>
-        <option value="tequila">tequila</option>
-        <option value="gin">gin</option>
-        <option value="wine">wine</option>
-        <option value="other">other</option>
-      </select>
+      />
+      <label>
+        Не забудь поставити правильну категорію
+        <select
+          name="category"
+          defaultValue={article.category}
+          className="border border-gray-300 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+        >
+          <option value="whisky">whisky</option>
+          <option value="rum">rum</option>
+          <option value="tequila">tequila</option>
+          <option value="gin">gin</option>
+          <option value="wine">wine</option>
+          <option value="other">other</option>
+        </select>
+      </label>
       <textarea
         name="text"
         defaultValue={article.text}
