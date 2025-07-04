@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 export async function generateMetadata({ params }) {
   const { slug } = await params;
   const BASE_URL = "https://pid-korkom-api.onrender.com/api/articles/slug";
@@ -23,11 +25,16 @@ export default async function CurrentArticlePage({ params }) {
         <h1 className="text-3xl font-bold mb-4">{article?.title}</h1>
         <p className="text-gray-700 mb-6">{article?.text}</p>
         {article?.image && (
-          <img
+          <div className="relative w-full h-[300px] rounded overflow-hidden">
+          <Image
             src={article.image}
             alt={article.title}
-            className="w-full max-h-[500px] object-cover rounded"
+            fill
+            className="object-cover"
+            sizes="(max-width: 768px) 100vw, 768px"
+            priority
           />
+        </div>
         )}
       </article>
     </div>

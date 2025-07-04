@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 
 export default async function Home() {
@@ -21,11 +22,16 @@ export default async function Home() {
                   </h3>
                   <p className="text-gray-700 mb-4">{article.text}</p>
                   {article.image && (
-                    <img
+                    <div className="relative w-full h-[300px] rounded overflow-hidden">
+                    <Image
                       src={article.image}
                       alt={article.title}
-                      className="w-full h-48 object-cover rounded"
+                      fill
+                      className="object-cover"
+                      sizes="(max-width: 768px) 100vw, 768px"
+                      priority
                     />
+                  </div>
                   )}
                 </article>
               </Link>
