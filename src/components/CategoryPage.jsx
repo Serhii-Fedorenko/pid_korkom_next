@@ -15,7 +15,7 @@ export default async function CategoryPage({category}) {
               key={article._id}
               className="border rounded-lg shadow hover:shadow-lg transition overflow-hidden"
             >
-              <Link href={`/articles/${article._id}`} className="block p-4">
+              <Link href={`/articles/${article.slug}`} className="block p-4">
                 <article>
                   <h3 className="text-xl font-semibold mb-2">
                     {article.title}
