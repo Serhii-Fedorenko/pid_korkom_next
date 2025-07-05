@@ -30,7 +30,14 @@ export default function Modal({ onClose }) {
 
   return createPortal(
     <div onClick={handleBackdropClick} className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm animate-fade">
-      <div className="bg-white border border-black rounded-xl p-6 w-full max-w-md sm:max-w-lg shadow-none">
+      <div className="relative bg-white border border-black rounded-xl px-6 py-10 w-full max-w-md sm:max-w-lg shadow-none">
+      <button
+          onClick={closeModal}
+          aria-label="Закрити"
+          className="absolute top-2 right-2 text-2xl text-gray-700 hover:text-black focus:outline-none"
+        >
+          &times;
+        </button>
         {view === "login" ? <LoginForm /> : <RegisterForm />}
         <button
           onClick={toggleModal}

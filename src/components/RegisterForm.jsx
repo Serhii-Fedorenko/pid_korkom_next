@@ -36,23 +36,23 @@ export default function RegisterForm() {
         type="text"
         name="name"
         placeholder="ім'я"
-        className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-blue-400"
+        className="w-full px-4 py-2 border border-black rounded-md bg-white text-black focus:outline-none focus:ring-2 focus:ring-black"
       ></input>
       <input
         type="text"
         name="email"
         placeholder="пошта"
-        className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-blue-400"
+        className="w-full px-4 py-2 border border-black rounded-md bg-white text-black focus:outline-none focus:ring-2 focus:ring-black"
       ></input>
       <input
         type="password"
         name="password"
         placeholder="пароль"
-        className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-blue-400"
+        className="w-full px-4 py-2 border border-black rounded-md bg-white text-black focus:outline-none focus:ring-2 focus:ring-black"
       ></input>
       <button
         type="submit"
-        className="w-full bg-blue-600 text-white py-2 rounded-md hover:bg-blue-700 transition"
+        className="w-full bg-black text-white py-2 rounded-md hover:bg-gray-900 transition"
       >
         Зареєструватися
       </button>
