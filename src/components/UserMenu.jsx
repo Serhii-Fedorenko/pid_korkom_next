@@ -6,7 +6,7 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 
 export default function UserMenu() {
-  const { user,isAdmin, isAuthenticated, logout } = useAuth();
+  const { user, isAdmin, isAuthenticated, logout } = useAuth();
   const { openModal } = useModal();
   const [hydrated, setHydrated] = useState(false);
 
@@ -25,7 +25,7 @@ export default function UserMenu() {
               Dashboard
             </Link>
           )}
-          <span className="text-gray-800">Привіт, {user.name}</span>
+          <span className="text-white-800">Привіт, {user.name}</span>
           <button onClick={logout} className="text-red-500 hover:underline">
             Вийти
           </button>
@@ -33,7 +33,7 @@ export default function UserMenu() {
       ) : (
         <button
           onClick={() => openModal("login")}
-          className="text-white-600 hover:underline"
+          className="text-white hover:underline"
         >
           Увійти
         </button>

@@ -29,15 +29,12 @@ export default function Modal({ onClose }) {
   if (!mounted || !isOpen) return null;
 
   return createPortal(
-    <div
-      className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm"
-      onClick={handleBackdropClick}
-    >
-      <div className="bg-white rounded-xl shadow-xl p-6 w-full max-w-md sm:max-w-lg">
+    <div onClick={handleBackdropClick} className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm animate-fade">
+      <div className="bg-white border border-black rounded-xl p-6 w-full max-w-md sm:max-w-lg shadow-none">
         {view === "login" ? <LoginForm /> : <RegisterForm />}
         <button
           onClick={toggleModal}
-          className="w-full bg-blue-600 text-white py-2 rounded-md hover:bg-blue-700 transition mt-5"
+          className="w-full mt-6 text-sm text-black underline hover:opacity-70 transition"
         >
           {view === "login" ? "Ще немає акаунту?" : "Вже є акаунт?"}
         </button>

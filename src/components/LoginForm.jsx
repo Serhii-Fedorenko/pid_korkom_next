@@ -4,7 +4,7 @@ import { useModal } from "@/context/ModalContext";
 
 export default function LoginForm() {
   const { login } = useAuth();
-  const {closeModal} = useModal()
+  const { closeModal } = useModal();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -22,8 +22,8 @@ export default function LoginForm() {
 
     if (res.ok) {
       const userData = await res.json();
-      login(userData); 
-      closeModal?.(); 
+      login(userData);
+      closeModal?.();
     } else {
       alert("Помилка логіну");
     }
@@ -35,17 +35,19 @@ export default function LoginForm() {
         type="text"
         name="email"
         placeholder="пошта"
-        className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-blue-400"
-      ></input>
+        required
+        className="w-full px-4 py-2 border border-black rounded-md bg-white text-black focus:outline-none focus:ring-2 focus:ring-black"
+      />
       <input
         type="password"
         name="password"
         placeholder="пароль"
-        className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-blue-400"
-      ></input>
+        required
+        className="w-full px-4 py-2 border border-black rounded-md bg-white text-black focus:outline-none focus:ring-2 focus:ring-black"
+      />
       <button
         type="submit"
-        className="w-full bg-blue-600 text-white py-2 rounded-md hover:bg-blue-700 transition"
+        className="w-full bg-black text-white py-2 rounded-md hover:bg-gray-900 transition"
       >
         Увійти
       </button>

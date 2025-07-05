@@ -20,21 +20,21 @@ export default async function CurrentArticlePage({ params }) {
   }).then((res) => res.json());
 
   return (
-    <div className="max-w-3xl mx-auto px-4 py-8">
-      <article>
-        <h1 className="text-3xl font-bold mb-4">{article?.title}</h1>
-        <p className="text-gray-700 mb-6">{article?.text}</p>
+    <div className="max-w-3xl mx-auto px-4 py-12">
+      <article className="prose lg:prose-lg max-w-none">
+        <h1>{article?.title}</h1>
+        <p>{article?.text}</p>
         {article?.image && (
-          <div className="relative w-full h-[300px] rounded overflow-hidden">
-          <Image
-            src={article.image}
-            alt={article.title}
-            fill
-            className="object-cover"
-            sizes="(max-width: 768px) 100vw, 768px"
-            priority
-          />
-        </div>
+          <div className="relative w-full h-[400px] rounded-lg overflow-hidden shadow-lg">
+            <Image
+              src={article.image}
+              alt={article.title}
+              fill
+              className="object-cover"
+              sizes="(max-width: 768px) 100vw, 768px"
+              priority
+            />
+          </div>
         )}
       </article>
     </div>
