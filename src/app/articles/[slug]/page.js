@@ -23,7 +23,6 @@ export default async function CurrentArticlePage({ params }) {
     <div className="max-w-3xl mx-auto px-4 py-12">
       <article className="prose lg:prose-lg max-w-none">
         <h1>{article?.title}</h1>
-        <p>{article?.text}</p>
         {article?.image && (
           <div className="relative w-full h-[400px] rounded-lg overflow-hidden shadow-lg">
             <Image
@@ -36,6 +35,7 @@ export default async function CurrentArticlePage({ params }) {
             />
           </div>
         )}
+        <p>{article?.text}</p>
       </article>
     </div>
   );

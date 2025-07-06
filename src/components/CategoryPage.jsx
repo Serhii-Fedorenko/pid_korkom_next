@@ -7,10 +7,12 @@ export default async function CategoryPage({ category }) {
     next: { revalidate: 60 },
   }).then((res) => res.json());
 
+  const articles = res.articles
+
   return (
     <>
       <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-screen-xl mx-auto px-4">
-        {res.map((article) => (
+        {articles.map((article) => (
           <li
             key={article._id}
             className="border border-gray-200 rounded-xl shadow-sm hover:shadow-md transition overflow-hidden bg-white"

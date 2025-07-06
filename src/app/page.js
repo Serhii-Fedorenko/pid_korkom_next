@@ -1,11 +1,19 @@
 import Image from "next/image";
 import Link from "next/link";
 
-export default async function Home() {
+export default async function Home({ searchParams }) {
   const BASE_URL = "https://pid-korkom-api.onrender.com/api/articles";
-  const res = await fetch(BASE_URL, { next: { revalidate: 60 } }).then((res) =>
-    res.json()
-  );
+  const LIMIT = 9;
+  const page = Number(searchParams?.page) || 1;
+
+  const res = await fetch(`${BASE_URL}?page=${page}&limit=${LIMIT}`, {
+    next: { revalidate: 60 },
+  }).then((res) => res.json());
+
+  const { articles, totalPages } = res;
+
+  const isFirstPage = page <= 1;
+  const isLastPage = page >= totalPages;
 
   return (
     <>
@@ -13,7 +21,7 @@ export default async function Home() {
         Головна сторінка
       </h1>
       <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-screen-xl mx-auto px-4">
-        {res.map((article) => (
+        {articles.map((article) => (
           <li
             key={article._id}
             className="border border-gray-200 rounded-xl shadow-sm hover:shadow-md transition overflow-hidden bg-white"
@@ -41,6 +49,29 @@ export default async function Home() {
           </li>
         ))}
       </ul>
+      <div className="flex justify-center gap-4 my-10">
+        {!isFirstPage && (
+          <Link
+            href={`/?page=${page - 1}`}
+            className="px-4 py-2 bg-gray-200 rounded hover:bg-gray-300"
+          >
+            Назад
+          </Link>
+        )}
+
+        <span className="px-4 py-2 text-gray-600">
+          Сторінка {page} з {totalPages}
+        </span>
+
+        {!isLastPage && (
+          <Link
+            href={`/?page=${page + 1}`}
+            className="px-4 py-2 bg-gray-200 rounded hover:bg-gray-300"
+          >
+            Далі
+          </Link>
+        )}
+      </div>
     </>
   );
 }

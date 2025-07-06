@@ -24,10 +24,10 @@ export default function AdminDashboard() {
     const fetchArticles = async () => {
       try {
         const res = await fetch(
-          "https://pid-korkom-api.onrender.com/api/articles"
+          "https://pid-korkom-api.onrender.com/api/admin"
         );
         const data = await res.json();
-        setArticles(data.reverse());
+        setArticles(data);
       } catch (error) {
         console.error("Помилка завантаження статей", error);
       }
