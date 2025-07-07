@@ -1,14 +1,21 @@
+import SearchForm from "@/components/SearchForm";
 import Image from "next/image";
 import Link from "next/link";
 
 export default async function Home({ searchParams }) {
   const BASE_URL = "https://pid-korkom-api.onrender.com/api/articles";
   const LIMIT = 9;
-  const page = Number(searchParams?.page) || 1;
+  const pageParams = await searchParams;
+  const page = Number(pageParams?.page) || 1;
+  const query = await searchParams;
+  const search = query?.search || "";
 
-  const res = await fetch(`${BASE_URL}?page=${page}&limit=${LIMIT}`, {
-    next: { revalidate: 60 },
-  }).then((res) => res.json());
+  const res = await fetch(
+    `${BASE_URL}?page=${page}&limit=${LIMIT}&search=${search}`,
+    {
+      next: { revalidate: 60 },
+    }
+  ).then((res) => res.json());
 
   const { articles, totalPages } = res;
 
@@ -20,6 +27,7 @@ export default async function Home({ searchParams }) {
       <h1 className="text-4xl font-bold text-center my-10 tracking-tight">
         Головна сторінка
       </h1>
+      <SearchForm initialSearch={search} />
       <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-screen-xl mx-auto px-4">
         {articles.map((article) => (
           <li
@@ -52,7 +60,9 @@ export default async function Home({ searchParams }) {
       <div className="flex justify-center gap-4 my-10">
         {!isFirstPage && (
           <Link
-            href={`/?page=${page - 1}`}
+            href={`/?page=${page - 1}${
+              search ? `&search=${encodeURIComponent(search)}` : ""
+            }`}
             className="px-4 py-2 bg-gray-200 rounded hover:bg-gray-300"
           >
             Назад
@@ -65,7 +75,9 @@ export default async function Home({ searchParams }) {
 
         {!isLastPage && (
           <Link
-            href={`/?page=${page + 1}`}
+            href={`/?page=${page + 1}${
+              search ? `&search=${encodeURIComponent(search)}` : ""
+            }`}
             className="px-4 py-2 bg-gray-200 rounded hover:bg-gray-300"
           >
             Далі
