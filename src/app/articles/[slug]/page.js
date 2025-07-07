@@ -25,14 +25,19 @@ export default async function CurrentArticlePage({ params }) {
         <h1>{article?.title}</h1>
         {article?.image && (
           <div className="relative w-full h-[400px] rounded-lg overflow-hidden shadow-lg">
-            <Image
-              src={article.image}
-              alt={article.title}
-              fill
-              className="object-cover"
-              sizes="(max-width: 768px) 100vw, 768px"
-              priority
-            />
+            <figure className="relative w-full max-w-3xl mx-auto rounded-lg overflow-hidden shadow-lg h-[400px]">
+              <Image
+                src={article.image.url}
+                alt={article.image.alt}
+                fill
+                className="object-cover"
+                sizes="(max-width: 768px) 100vw, 768px"
+                priority
+              />
+              <figcaption className="absolute bottom-0 right-0 px-2 py-1 bg-[rgba(0,0,0,0.5)] text-white text-sm">
+                {article.image.caption}
+              </figcaption>
+            </figure>
           </div>
         )}
         <p>{article?.text}</p>

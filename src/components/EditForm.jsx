@@ -27,6 +27,8 @@ const EditForm = ({ id, collapseForm }) => {
     formData.append("text", form.elements.text.value);
     formData.append("category", form.elements.category.value);
     formData.append("slug", form.elements.slug.value);
+    formData.append("alt", form.elements.alt.value);
+    formData.append("caption", form.elements.caption.value);
     if (image) {
       formData.append("image", image);
     }
@@ -92,6 +94,20 @@ const EditForm = ({ id, collapseForm }) => {
         name="image"
         onChange={(e) => setImage(e.target.files[0])}
         className="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-indigo-50 file:text-indigo-700 hover:file:bg-indigo-100"
+      />
+      <input
+        type="text"
+        name="alt"
+        defaultValue={article.image?.alt || ""}
+        placeholder="для читалок"
+        className="border border-gray-300 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+      />
+      <input
+        type="text"
+        name="caption"
+        defaultValue={article.image?.caption || ""}
+        placeholder="для етики"
+        className="border border-gray-300 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"
       />
       <div className="...">
         <button
