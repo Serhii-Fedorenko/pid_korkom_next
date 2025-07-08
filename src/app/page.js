@@ -43,7 +43,7 @@ export default async function Home({ searchParams }) {
                 {article.image && (
                   <div className="relative w-full h-[200px] rounded overflow-hidden">
                     <Image
-                      src={article.image}
+                      src={article.image.url}
                       alt={article.title}
                       fill
                       className="object-cover"
