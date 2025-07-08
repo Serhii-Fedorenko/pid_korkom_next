@@ -1,15 +1,26 @@
 import Image from "next/image";
 
+export const dynamicParams = true;
+export const revalidate = 60; 
+
 export async function generateMetadata({ params }) {
-  const { slug } = await params;
-  const BASE_URL = "https://pid-korkom-api.onrender.com/api/articles/slug";
-  const article = await fetch(`${BASE_URL}/${slug}`, {
-    next: { revalidate: 60 },
-  }).then((res) => res.json());
-  return {
-    title: article.title,
-    description: article.text.slice(0, 150),
-  };
+  try {
+    const { slug } = params;
+    const BASE_URL = "https://pid-korkom-api.onrender.com/api/articles/slug";
+    const res = await fetch(`${BASE_URL}/${slug}`, {
+      next: { revalidate: 60 },
+    });
+    const article = await res.json();
+    return {
+      title: article.title,
+      description: article.text.slice(0, 150),
+    };
+  } catch (error) {
+    return {
+      title: "Стаття не знайдена",
+      description: "Ми не змогли знайти цю статтю.",
+    };
+  }
 }
 
 export default async function CurrentArticlePage({ params }) {
