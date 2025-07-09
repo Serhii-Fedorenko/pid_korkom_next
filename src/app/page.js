@@ -10,14 +10,27 @@ export default async function Home({ searchParams }) {
   const query = await searchParams;
   const search = query?.search || "";
 
-  const res = await fetch(
-    `${BASE_URL}?page=${page}&limit=${LIMIT}&search=${search}`,
-    {
-      next: { revalidate: 60 },
-    }
-  ).then((res) => res.json());
+  let articles = [];
+  let totalPages = 1;
 
-  const { articles, totalPages } = res;
+  try {
+    const res = await fetch(
+      `${BASE_URL}?page=${page}&limit=${LIMIT}&search=${search}`,
+      { next: { revalidate: 60 } }
+    );
+
+    if (!res.ok) {
+      throw new Error(`API error: ${res.status}`);
+    }
+
+    const data = await res.json();
+    articles = data.articles;
+    totalPages = data.totalPages;
+  } catch (error) {
+    console.error("Помилка при отриманні статей:", error.message);
+  }
+
+  // const { articles, totalPages } = res;
 
   const isFirstPage = page <= 1;
   const isLastPage = page >= totalPages;
