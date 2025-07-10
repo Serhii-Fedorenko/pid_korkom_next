@@ -29,6 +29,7 @@ const EditForm = ({ id, collapseForm }) => {
     formData.append("slug", form.elements.slug.value);
     formData.append("alt", form.elements.alt.value);
     formData.append("caption", form.elements.caption.value);
+    formData.append("description", form.elements.description.value);
     if (image) {
       formData.append("image", image);
     }
@@ -68,8 +69,15 @@ const EditForm = ({ id, collapseForm }) => {
         defaultValue={article.slug}
         className="border border-gray-300 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"
       />
+      <input
+        type="text"
+        name="description"
+        placeholder="опис в двух словах"
+        defaultValue={article.description}
+        className="border border-gray-300 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+      />
       <label>
-        Не забудь поставити правильну категорію
+        <span className="text-orange-700">Не забудь поставити правильну категорію</span>
         <select
           name="category"
           defaultValue={article.category}

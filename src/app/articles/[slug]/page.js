@@ -1,7 +1,7 @@
 import Image from "next/image";
 
 export const dynamicParams = true;
-export const revalidate = 60; 
+export const revalidate = 60;
 
 export async function generateMetadata({ params }) {
   try {
@@ -33,12 +33,14 @@ export default async function CurrentArticlePage({ params }) {
   return (
     <div className="max-w-3xl mx-auto px-4 py-12">
       <article className="prose lg:prose-lg max-w-none">
-        <h1>{article?.title}</h1>
+        <h1 className="text-3xl sm:text-4xl font-bold mb-8 text-center max-w-2xl mx-auto text-gray-900">
+          {article?.title}
+        </h1>
         {article?.image && (
-          <div className="relative w-full h-[400px] rounded-lg overflow-hidden shadow-lg">
+          <div className="relative w-full h-[400px] rounded-lg overflow-hidden shadow-lg my-10">
             <figure className="relative w-full max-w-3xl mx-auto rounded-lg overflow-hidden shadow-lg h-[400px]">
               <Image
-                src={article.image.url}
+                src={article && article.image.url}
                 alt={article.image.alt}
                 fill
                 className="object-cover"
@@ -51,7 +53,7 @@ export default async function CurrentArticlePage({ params }) {
             </figure>
           </div>
         )}
-        <p>{article?.text}</p>
+        <p className="whitespace-pre-wrap">{article?.text}</p>
       </article>
     </div>
   );

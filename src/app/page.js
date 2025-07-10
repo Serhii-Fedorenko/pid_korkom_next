@@ -51,7 +51,7 @@ export default async function Home({ searchParams }) {
               <article>
                 <h3 className="text-xl font-semibold mb-2">{article.title}</h3>
                 <p className="text-sm text-gray-700 mb-4 line-clamp-4">
-                  {article.text}
+                  {article.description}
                 </p>
                 {article.image && (
                   <div className="relative w-full h-[200px] rounded overflow-hidden">
