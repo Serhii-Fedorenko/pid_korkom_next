@@ -23,7 +23,7 @@ export default async function CategoryPage({ category }) {
                 <p className="text-sm text-gray-700 mb-4 line-clamp-4">
                   {article.text}
                 </p>
-                {article.image && (
+                {article.image?.url && (
                   <div className="relative w-full h-[200px] rounded overflow-hidden">
                     <Image
                       src={article.image.url}
