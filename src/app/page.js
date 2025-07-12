@@ -38,7 +38,7 @@ export default async function Home({ searchParams }) {
   return (
     <>
       <h1 className="text-4xl font-bold text-center my-10 tracking-tight">
-        Головна сторінка
+        Під Корком
       </h1>
       <SearchForm initialSearch={search} />
       <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-screen-xl mx-auto px-4">
@@ -49,10 +49,10 @@ export default async function Home({ searchParams }) {
           >
             <Link href={`/articles/${article.slug}`} className="block p-4">
               <article>
-                <h3 className="text-xl font-semibold mb-2">{article.title}</h3>
-                <p className="text-sm text-gray-700 mb-4 line-clamp-4">
+                <h2 className="text-xl font-semibold mb-2">{article.title}</h2>
+                <h3 className="text-sm text-gray-700 mb-4 line-clamp-4">
                   {article.description}
-                </p>
+                </h3>
                 {article.image?.url && (
                   <div className="relative w-full h-[200px] rounded overflow-hidden">
                     <Image
