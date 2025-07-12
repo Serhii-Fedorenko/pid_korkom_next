@@ -30,6 +30,26 @@ export default async function CurrentArticlePage({ params }) {
     next: { revalidate: 60 },
   }).then((res) => res.json());
 
+  function parseTextWithParagraphs(text) {
+    if (!text || typeof text !== "string") {
+      return "";
+    }
+
+    const linked = text.replace(
+      /\[\[([^\|\]]+)\|([^\]]+)\]\]/g,
+      '<a href="/articles/$2" class="text-blue-600 underline hover:text-blue-800">$1</a>'
+    );
+
+    return linked
+      .split(/\n{2,}/)
+      .map(function (p) {
+        return (
+          '<p className="indent-8">' + p.trim().replace(/\n/g, "<br/>") + "</p>"
+        );
+      })
+      .join("");
+  }
+
   return (
     <div className="max-w-3xl mx-auto px-4 py-12">
       <article className="prose lg:prose-lg max-w-none">
@@ -53,7 +73,12 @@ export default async function CurrentArticlePage({ params }) {
             </figure>
           </div>
         )}
-        <p className="whitespace-pre-wrap">{article?.text}</p>
+        <div
+          className="prose lg:prose-lg max-w-none"
+          dangerouslySetInnerHTML={{
+            __html: parseTextWithParagraphs(article.text),
+          }}
+        />
       </article>
     </div>
   );
