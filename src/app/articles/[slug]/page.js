@@ -31,24 +31,27 @@ export default async function CurrentArticlePage({ params }) {
   }).then((res) => res.json());
 
   function parseTextWithParagraphs(text) {
-    if (!text || typeof text !== "string") {
-      return "";
-    }
-
-    const linked = text.replace(
+    if (!text || typeof text !== "string") return "";
+  
+    const normalized = text.replace(/\r\n|\r/g, "\n");
+  
+    const linked = normalized.replace(
       /\[\[([^\|\]]+)\|([^\]]+)\]\]/g,
       '<a href="/articles/$2" class="text-blue-600 underline hover:text-blue-800">$1</a>'
     );
-
-    return linked
-      .split(/\n{2,}/)
-      .map(function (p) {
-        return (
-          '<p className="indent-8">' + p.trim().replace(/\n/g, "<br/>") + "</p>"
-        );
+  
+    const paragraphs = linked.split(/\n\s*\n/);
+  
+    const html = paragraphs
+      .map((p) => {
+        const withBreaks = p.trim().replace(/\n/g, "<br />");
+        return `<p class="indent-8 mb-4">${withBreaks}</p>`;
       })
       .join("");
+  
+    return html;
   }
+  
 
   return (
     <div className="max-w-3xl mx-auto px-4 py-12">
