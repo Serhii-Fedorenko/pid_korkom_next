@@ -7,7 +7,7 @@ export default async function CategoryPage({ category }) {
     next: { revalidate: 60 },
   }).then((res) => res.json());
 
-  const articles = res.articles
+  const articles = res.articles;
 
   return (
     <>
@@ -19,10 +19,10 @@ export default async function CategoryPage({ category }) {
           >
             <Link href={`/articles/${article.slug}`} className="block p-4">
               <article>
-                <h3 className="text-xl font-semibold mb-2">{article.title}</h3>
-                <p className="text-sm text-gray-700 mb-4 line-clamp-4">
-                  {article.text}
-                </p>
+                <h2 className="text-xl font-semibold mb-2">{article.title}</h2>
+                <h3 className="text-sm text-gray-700 mb-4 line-clamp-4">
+                  {article.description}
+                </h3>
                 {article.image?.url && (
                   <div className="relative w-full h-[200px] rounded overflow-hidden">
                     <Image
